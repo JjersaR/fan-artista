@@ -11,7 +11,6 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.rsj.sg.album.entity.Album;
 import com.rsj.sg.cancion.entity.Cancion;
-import com.rsj.sg.usu.entity.Usuario;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -22,9 +21,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 import lombok.Data;
@@ -40,9 +37,8 @@ public class Artista {
   @GeneratedValue(strategy = GenerationType.UUID)
   private UUID id;
 
-  @OneToOne(optional = false)
-  @JoinColumn(name = "usuario_id", nullable = false)
-  private Usuario usuario;
+  @Column(name = "usuario_id", nullable = false)
+  private UUID usuarioId;
 
   @Column(nullable = false)
   private String nombreArtistico;

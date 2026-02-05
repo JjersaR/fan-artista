@@ -3,7 +3,6 @@ package com.rsj.sg.anun.entity;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -22,8 +21,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Index;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -53,10 +50,6 @@ public class Anuncio {
 
   @Column(nullable = false)
   private String urlDestino;
-
-  // @ManyToOne
-  // @JoinColumn(name = "advertiser_id")
-  // private Advertiser advertiser;
 
   @Enumerated(EnumType.STRING)
   @Column(nullable = false)

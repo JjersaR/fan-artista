@@ -9,8 +9,6 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import com.rsj.sg.autor.entity.Artista;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
@@ -19,8 +17,6 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -36,16 +32,10 @@ public class Cancion {
   @Column(nullable = false)
   private String titulo;
 
-  @ManyToOne
-  @JoinColumn(name = "artista_id", nullable = false)
-  private Artista artista;
+  @Column(nullable = false)
+  private UUID artistaId;
 
-  /*
-   * @ManyToOne
-   *
-   * @JoinColumn(name = "album_id")
-   * private Album album;
-   */
+  private UUID albumId;
 
   private Integer numeroPista;
 
@@ -89,11 +79,6 @@ public class Cancion {
   private Integer bitrate; // kbps
   private String codec; // mp3, flac, aac
   private Long tamanoBytes;
-
-  /*
-   * @OneToMany(mappedBy = "cancion", cascade = CascadeType.ALL)
-   * private List<Reproduccion> reproducciones;
-   */
 
   // Audit
   @CreatedDate

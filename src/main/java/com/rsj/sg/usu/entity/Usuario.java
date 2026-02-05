@@ -31,15 +31,27 @@ public class Usuario {
   private String email;
 
   @Column(nullable = false)
-  private String password;
-
-  @Column(nullable = false)
   private String nombre;
 
   private String apellido;
 
   @Column(unique = true)
   private String username;
+
+  @Column(nullable = false)
+  private String password;
+
+  @Column(name = "is_enabled")
+  private boolean isEnabled = true;
+
+  @Column(name = "account_no_expired")
+  private boolean accountNoExpired = true;
+
+  @Column(name = "account_no_locked")
+  private boolean accountNoLocked = true;
+
+  @Column(name = "credential_no_expired")
+  private boolean credentialNoExpired = true;
 
   @Enumerated(EnumType.STRING)
   @Column(nullable = false)
@@ -50,21 +62,7 @@ public class Usuario {
 
   private LocalDateTime ultimoLogin;
 
-  @Column(nullable = false)
-  private boolean activo = true;
-
   private String fotoPerfilUrl;
-
-  /*
-   * @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
-   * private List<Playlist> playlists;
-   *
-   * @OneToMany(mappedBy = "usuario")
-   * private List<Reproduccion> reproducciones;
-   *
-   * @OneToMany(mappedBy = "usuario")
-   * private List<Transaccion> transacciones;
-   */
 
   // Audit fields
   @CreatedDate
