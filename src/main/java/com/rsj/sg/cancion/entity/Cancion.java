@@ -37,29 +37,12 @@ public class Cancion {
 
   private UUID albumId;
 
-  private Integer numeroPista;
-
   @Column(nullable = false)
   private Integer duracionSegundos;
-
-  @Column(nullable = false)
-  private String archivoAudioUrl;
-
-  private String archivoAudioKey; // Key en S3/Cloud Storage
 
   @Enumerated(EnumType.STRING)
   @Column(nullable = false)
   private EEstadoContenido estado = EEstadoContenido.PENDIENTE;
-
-  /*
-   * @ElementCollection
-   *
-   * @CollectionTable(name = "cancion_generos", joinColumns = @JoinColumn(name =
-   * "cancion_id"))
-   *
-   * @Column(name = "genero")
-   * private Set<String> generos = new HashSet<>();
-   */
 
   private LocalDate fechaLanzamiento;
 
@@ -74,11 +57,6 @@ public class Cancion {
   private Long totalReproducciones = 0L;
 
   private Long reproduccionesEsteMes = 0L;
-
-  // Metadata técnica
-  private Integer bitrate; // kbps
-  private String codec; // mp3, flac, aac
-  private Long tamanoBytes;
 
   // Audit
   @CreatedDate
