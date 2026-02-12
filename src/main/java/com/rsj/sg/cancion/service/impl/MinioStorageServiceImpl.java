@@ -12,6 +12,10 @@ import com.rsj.sg.cancion.controller.dto.AudioObjectNameBuilder;
 import com.rsj.sg.cancion.controller.dto.StoredFile;
 import com.rsj.sg.cancion.controller.dto.utils.EAudioCodec;
 import com.rsj.sg.cancion.service.IStorageService;
+import com.rsj.sg.error.exceptions.DeleteException;
+import com.rsj.sg.error.exceptions.DownloadException;
+import com.rsj.sg.error.exceptions.ListException;
+import com.rsj.sg.error.exceptions.UploadException;
 
 import io.minio.GetObjectArgs;
 import io.minio.ListObjectsArgs;
@@ -51,7 +55,7 @@ public class MinioStorageServiceImpl implements IStorageService {
           file.getSize(),
           file.getContentType());
     } catch (Exception e) {
-      throw new RuntimeException("Error al subir el audio", e);
+      throw new UploadException("Error al subir el archivo");
     }
   }
 
@@ -67,7 +71,7 @@ public class MinioStorageServiceImpl implements IStorageService {
 
       return files;
     } catch (Exception e) {
-      throw new RuntimeException("Error listando archivos", e);
+      throw new ListException("Error listando archivos");
     }
 
   }
@@ -87,7 +91,7 @@ public class MinioStorageServiceImpl implements IStorageService {
     try {
       return client.getObject(GetObjectArgs.builder().bucket(bucket).object(objectName).build());
     } catch (Exception e) {
-      throw new RuntimeException("Error descargando archivo", e);
+      throw new DownloadException("Error descargando archivo");
     }
   }
 
@@ -96,7 +100,7 @@ public class MinioStorageServiceImpl implements IStorageService {
     try {
       client.removeObject(RemoveObjectArgs.builder().bucket(bucket).object(objectName).build());
     } catch (Exception e) {
-      throw new RuntimeException("Error borrando archivo", e);
+      throw new DeleteException("Error borrando archivo");
     }
   }
 }
